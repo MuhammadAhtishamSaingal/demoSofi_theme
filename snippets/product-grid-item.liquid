@@ -70,7 +70,7 @@
           {%- endif -%}
             {%- if label_present -%}
             <div class="product-image__overlay-top-left ">
-              {% include 'product-get-label' with product: product %}
+              {% include 'product-get-label' with product, product: product %}
             </div>
             {%- endif -%}
             {% if show_button_add_to_wishlist %}
@@ -117,7 +117,7 @@
           <div class="product-collection__info">
             <div class="product-collection__more-info">
               {%- if product.collections.size > 0 -%}
-              {% render 'product-get-collections' with product: product %}
+              {% render 'product-get-collections' with product, product: product %}
               {%- endif -%}   
             </div>
           </div>
@@ -132,14 +132,14 @@
 			{%- if show_reviews -%}
             {% include 'reviews-count' %}
               <div class="product-collection__reviews">
-                {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+                {% render 'product-get-review' with id, id: id, hide_counter: hide_reviews_counter %}
               </div>
               
             {%- endif -%}        
           <div class="frm-price-color">
           {%- if show_price -%}
               <div class="product-collection__price ">
-                  {% render 'product-get-price' with price: price compare_at_price: product.compare_at_price %}
+                  {% render 'product-get-price' with price, price: price, compare_at_price: product.compare_at_price %}
               </div>
           {%- endif -%}
         </div>
@@ -163,7 +163,7 @@
           <div class="product-collection__info">
             <div class="product-collection__more-info">
               {%- if product.collections.size > 0 -%}
-              {% render 'product-get-collections' with product: product %}
+              {% render 'product-get-collections' with product, product: product %}
               {%- endif -%}   
             </div>
           </div>
@@ -180,7 +180,7 @@
           {%- if show_reviews -%}
             {% include 'reviews-count' %}
             <div class="product-collection__reviews">
-              {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+              {% render 'product-get-review' with id, id: id, hide_counter: hide_reviews_counter %}
             </div>
           {%- endif -%} 
           {% form "product", product, id: null, class: "frm_product_collection", data-js-product-form: '' %}
@@ -259,7 +259,7 @@
           <div class="frm-price-color">
             {%- if show_price -%}
             <div class="product-collection__price ">
-              {% render 'product-get-price' with price: price compare_at_price: product.compare_at_price %}
+              {% render 'product-get-price' with price, price: price, compare_at_price: product.compare_at_price %}
             </div>
             {%- endif -%}
           </div>
@@ -293,4 +293,39 @@
       </div>
     
   </div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% include 'product-get-label' with product: product %}"
+  to: "{% include 'product-get-label' with product, product: product %}"
+  position: 5305..5369
+- from: "{% render 'product-get-collections' with product: product %}"
+  to: "{% render 'product-get-collections' with product, product: product %}"
+  position: 7769..7838
+- from: "{% render 'product-get-review' with id: id hide_counter: hide_reviews_counter
+    %}"
+  to: "{% render 'product-get-review' with id, id: id, hide_counter: hide_reviews_counter
+    %}"
+  position: 8303..8388
+- from: "{% render 'product-get-price' with price: price compare_at_price: product.compare_at_price
+    %}"
+  to: "{% render 'product-get-price' with price, price: price, compare_at_price: product.compare_at_price
+    %}"
+  position: 8604..8705
+- from: "{% render 'product-get-collections' with product: product %}"
+  to: "{% render 'product-get-collections' with product, product: product %}"
+  position: 9845..9914
+- from: "{% render 'product-get-review' with id: id hide_counter: hide_reviews_counter
+    %}"
+  to: "{% render 'product-get-review' with id, id: id, hide_counter: hide_reviews_counter
+    %}"
+  position: 10378..10463
+- from: "{% render 'product-get-price' with price: price compare_at_price: product.compare_at_price
+    %}"
+  to: "{% render 'product-get-price' with price, price: price, compare_at_price: product.compare_at_price
+    %}"
+  position: 14591..14692
+{%- endcomment -%}
